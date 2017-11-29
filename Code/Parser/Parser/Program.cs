@@ -43,7 +43,7 @@ namespace Parser
         {
             var custom = GetCustom(year, volume);
             var price =
-            (((cost + 60500) / rate["USDtoJPN"] * 1.01 + custom * 0.4) * rate["USDtoRUB"] + 9000 + (volume > 150 ? volume * 420 : 0)) * 1.1;
+            (((cost + 60500) / rate["USDtoJPN"] * 1.01 + custom * 0.4) * rate["USDtoRUB"] + 9000 + 0) * 1.1;
             return ((int)price).ToString();
         }
 
