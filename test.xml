@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+	<cars>
+		<car>
+			<mark_id>Ducati</mark_id>
+			<group_id>Monster 1200</group_id>
+			<run>6505</run>
+			<year>2014</year>
+			<currency>RUR</currency>
+			<price>1000000</price>
+			<color>Красный</color>
+			<type>Дорожный</type>
+			<engine_type>Карбюратор</engine_type>
+			<engine_volume>445</engine_volume>
+			<haggle>Возможен</haggle>
+			<images><image>http://price.site.ru/files/image1.jpg</image></images>
+		</car>
+	</cars>
+</data>
