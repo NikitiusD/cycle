@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0063)http://auc.samurai-motor.ru/motostats/?p=project/lot&id=2836310 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Samurai Motor: Мото статистика</title>
+	
+	<link href="./6_files/main.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="./6_files/utils.js.Без названия"></script><script type="text/javascript" src="./6_files/popup.js.Без названия"></script>
+	
+	
+	<script type="text/javascript" src="./6_files/highslide-full.packed.js.Без названия"></script>
+	<link rel="stylesheet" type="text/css" href="./6_files/highslide.css">
+	<!--link href="http://samurai-motor.ru/css/style1h___.css" rel="stylesheet" type="text/css" /-->
+
+	<script type="text/javascript" src="./6_files/jquery-1.7.2.min.js.Без названия"></script>
+	<script src="./6_files/flowplayer.js.Без названия"></script>
+</head>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="background: #f8f8f8;">
+
+	
+	<script type="text/javascript">
+		hs.graphicsDir = '/static/js/highslide/graphics/';
+		hs.outlineType = 'rounded-white';
+	</script>
+
+	<!--+++�"�>�_ п�_каза �_�_п�>�<�_а�_�%и�: �_к�_�_+++-->
+	<div id="popupMask" style="display:none;"></div>
+	<div id="popupContainer" style="display:none;">
+		<table width="100%" cellpadding="10" cellspacing="3" style="border: 2px solid #000000;">
+		<tbody><tr style="background:#FFFFFF" valign="top"><td id="popup_content"></td></tr>
+		</tbody></table>
+	</div>
+    <div align="center">
+		<img src="./6_files/header.jpg" alt="header">
+    </div>
+
+
+	<table width="1024" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tbody><tr>
+		<td>
+		
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tbody><tr>
+				<td width="189" height="71" valign="middle" style="background-color: black;">
+					<div style="MARGIN-LEFT: 8px; width:181px"><img src="./6_files/logo.gif"></div>
+				</td>
+				<td height="71" style="background-color: black;">
+				
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Verdana12px" id="header">
+					<tbody><tr>
+						<td height="24">&nbsp;</td>
+						<!--td height="24" align="right">
+							<a href="?lang=ru"><font color="#B9B9B9"><b>rus</b></font></a>&nbsp;&nbsp;<a href="?lang=en"><font color="#B9B9B9"><b>eng</b></font></a>&nbsp;&nbsp;
+						</td-->
+					</tr>
+					<tr>
+						<td align="left" valign="middle">
+							<table border="0" cellpadding="1" cellspacing="1" class="Verdana12px"><tbody><tr>
+<td><img src="./6_files/main_menu_separator.gif" alt=""></td>
+<td valign="middle" nowrap="" align="center"><a href="http://auc.samurai-motor.ru/moto/?p=project/searchform&amp;s&amp;ld" style="color: white;">Мото<br>аукционы</a></td>
+<td><img src="./6_files/main_menu_separator.gif" alt=""></td>
+<td valign="middle" nowrap="" align="center"><b style="color: white;">Мото<br>статистика</b></td>
+<td><img src="./6_files/main_menu_separator.gif" alt=""></td>
+<td valign="middle" nowrap="" align="center"><a href="http://auc.samurai-motor.ru/manager/?p=project/updateselfinfo" style="color: white;">Личные<br>данные</a></td>
+</tr></tbody></table>
+						</td>
+						<td align="right" valign="top">
+							<table class="Verdana12px" cellspacing="0" cellpadding="2" border="0"><tbody><tr><td align="right" nowrap="">ParserBot &nbsp;
+					</td></tr><tr><td align="right" nowrap=""><a href="http://auc.samurai-motor.ru/auth/logout.php">Выход&nbsp;</a></td></tr></tbody></table>
+						</td>
+					</tr>
+					</tbody></table>
+					
+				</td>
+			</tr>
+			<tr>
+				<td height="9" style="background: url(/static/img/bg_bottom.gif)"></td>
+				<td height="9" style="background: url(/static/img/bg_bottom.gif)"></td>
+			</tr>
+			</tbody></table>
+	
+		</td>
+	</tr>
+	<tr>
+		<td>
+	
+
+<script type="text/javascript" src="./6_files/highslide-full.packed.js.Без названия"></script>
+<link rel="stylesheet" type="text/css" href="./6_files/highslide.css">
+
+<script type="text/javascript">
+	hs.graphicsDir = '/static/js/highslide/graphics/';
+	hs.outlineType = 'rounded-white';
+</script>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<!--Module menu-->
+<tbody><tr>
+	<td>
+		<div class="foot1">
+			<div class="Verdana12px">
+		-
+		<a href="http://auc.samurai-motor.ru/motostats/?p=project/companies">Производители</a>
+		-
+		<a href="http://auc.samurai-motor.ru/motostats/?p=project/searchform&amp;s&amp;ld">Поиск для начинающих</a>
+		 -
+		<a href="http://auc.samurai-motor.ru/motostats/?p=project/searchform&amp;searchtype=max&amp;s&amp;ld">Поиск для профи</a>
+		 -
+	</div>
+		</div>
+	</td>
+</tr>
+<!--Main-->
+<tr>
+	<td valign="top" class="Color5">
+		<script language="Javascript" type="text/javascript">
+	//
+		
+		//Изменение состояния ставки
+		function updateRate( type, currency_title ){
+			
+			form = document.rate_form;
+			
+			if( type=='new' ){
+				if( confirm('ВНИМАНИЕ!\nВаша ставка: '+(form.new_summa.value)+currency_title+'. \nВЫ УВЕРЕНЫ?') ){
+					form.action='/managerates/proc.phtml?p=project/setrate';
+					form.submit();
+				}
+			}
+			
+			if( type=='update' ){
+				if( confirm('ВНИМАНИЕ!\nВАША НОВАЯ СТАВКА: '+(form.new_summa.value)+currency_title+'. \nВЫ УВЕРЕНЫ?') ){
+					form.action='/managerates/proc.phtml?p=project/updaterate';
+					form.submit();
+				}
+			}
+			
+			if(type=='cancel'){
+				if( confirm('ВНИМАНИЕ!\nВЫ ОТМЕНЯЕТЕ ВАШУ СТАВКУ. \nВЫ УВЕРЕНЫ?') ){
+					form.action='/managerates/proc.phtml?p=project/updaterate';
+					form.new_summa.value=0;
+					form.remark.value='';
+					form.submit();
+				}
+			}
+		}
+		
+		//Изменение размера фрейма по содержимому
+		function frame_resize(id_name){
+			document.getElementById(id_name).height=document.getElementById(id_name).contentWindow.document.body.scrollHeight;
+		}	
+		
+		function getRealDateAuto(){
+			document.getElementById('epc_result').innerHTML = '<img alt="loading..." src="/static/img/loading72.gif"/>';
+			company=document.getElementById('epc_company').value;
+			chassis=document.getElementById('epc_chassis').value;
+			x_getRealDateAuto( company, chassis, resultRealDateAuto );
+		}
+		function resultRealDateAuto( data ){
+			document.getElementById('epc_result').innerHTML = data;
+		}
+		
+		function loadPhoto() {
+			var arrPhoto = document.getElementsByName('photo');
+			for (i = 0; i < arrPhoto.length; ++i) {
+				arrPhoto[i].setAttribute('src', arrPhoto[i].getAttribute('load_src'));
+			}
+		}
+	//</script>
+			<table align="left" cellpadding="0" cellspacing="0" border="0" bgcolor="#F6F6F6">
+			<tbody><tr>
+				<td width="100%" background="./6_files/lsf_top_border.gif"></td>
+				<td height="13"><img src="./6_files/lsf_top_right_corner.gif"></td>
+			</tr>
+			<tr>
+				<td valign="top" class="Verdana12px">
+		<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td valign="top"><table border="0" cellpadding="4" cellspacing="0" class="Verdana12px"><tbody><tr><td>
+			<table border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td><img src="./6_files/info_top_left_corner.gif" border="0"></td>
+				<td background="./6_files/info_top_border.gif">
+					<b>
+		<div class="Verdana16px">2017-10-11 &gt; BDS Kantou &gt; № 5119</div>
+					</b>
+				</td>
+				<td><img src="./6_files/info_top_right_corner.gif" border="0"></td>
+			</tr>
+			<tr>
+				<td background="./6_files/info_left_border.gif"></td>
+				<td class="ColorBgInfo">
+		<table width="730" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td valign="middle" align="center" width="100%" class="ColorCell_1"><a href="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=0" onclick="return hs.expand(this)"><img id="url_img_0" src="./6_files/MotoPicGetter" load_src="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=0&amp;h=96" name="photo" height="96" vspace="10" border="1"></a>&nbsp;
+			<a href="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=1" onclick="return hs.expand(this)"><img id="url_img_1" src="./6_files/MotoPicGetter(1)" load_src="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=1&amp;h=96" name="photo" height="96" vspace="10" border="1"></a>&nbsp;
+			<a href="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=2" onclick="return hs.expand(this)" class=" "><img id="url_img_2" src="./6_files/MotoPicGetter(2)" load_src="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=2&amp;h=96" name="photo" height="96" vspace="10" border="1"></a>&nbsp;
+			<a href="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=3" onclick="return hs.expand(this)"><img id="url_img_3" src="./6_files/MotoPicGetter(3)" load_src="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=3&amp;h=96" name="photo" height="96" vspace="10" border="1"></a>&nbsp;
+			</td></tr><tr><td valign="middle" align="center" width="100%" class="ColorCell_1"><a href="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=4" onclick="return hs.expand(this)"><img id="url_img_4" src="./6_files/MotoPicGetter(4)" load_src="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=4&amp;h=96" name="photo" height="96" vspace="10" border="1"></a>&nbsp;
+			<a href="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=5" onclick="return hs.expand(this)"><img id="url_img_5" src="./6_files/MotoPicGetter(5)" load_src="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=5&amp;h=96" name="photo" height="96" vspace="10" border="1"></a>&nbsp;
+			<a href="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=6" onclick="return hs.expand(this)"><img id="url_img_6" src="./6_files/MotoPicGetter(6)" load_src="http://p3.aleado.com/p3/MotoPicGetter?year=2017&amp;month=10&amp;day=11&amp;auct_id=1&amp;bid=5119&amp;npic=6&amp;h=96" name="photo" height="96" vspace="10" border="1"></a>&nbsp;
+			</td></tr><tr><td valign="middle" align="center" width="100%" class="ColorCell_1"></td></tr></tbody></table>
+				</td>
+				<td background="./6_files/info_right_border.gif"></td>
+			</tr>
+			<tr>
+				<td><img src="./6_files/info_buttom_left_corner.gif" border="0"></td>
+				<td background="./6_files/info_bottom_border.gif"></td>
+				<td><img src="./6_files/info_buttom_right_corner.gif" border="0"></td>
+			</tr>
+			</tbody></table>
+		</td></tr><tr><td valign="top">
+			<table border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td><img src="./6_files/info_top_left_corner.gif" border="0"></td>
+				<td background="./6_files/info_top_border.gif">
+					<b>
+		<div class="Verdana16px">BMW&nbsp;BMW R1100S&nbsp;</div>
+					</b>
+				</td>
+				<td><img src="./6_files/info_top_right_corner.gif" border="0"></td>
+			</tr>
+			<tr>
+				<td background="./6_files/info_left_border.gif"></td>
+				<td class="ColorBgInfo">
+		<table border="0" class="Verdana12px" bgcolor="#D8D8D8" cellspacing="1" cellpadding="6" width="730"><tbody><tr><td class="ColorCell_1" align="right" width="90">№ рамы</td><td class="ColorCell_2" align="left">WB10422J3XZA84021</td><td class="ColorCell_1" align="right">цвет</td><td class="ColorCell_2" align="left">ORANGE</td><td class="ColorCell_1" align="right" width="90">общая оценка</td><td class="ColorCell_2" align="left">5</td><td class="ColorCell_1" align="right">внешний вид</td><td class="ColorCell_2" align="left">4</td></tr><tr><td class="ColorCell_1" align="right">пробег</td><td class="ColorCell_2" align="left">28,605K</td><td class="ColorCell_1" align="right">цена старт.</td><td class="ColorCell_2" align="left">150</td><td class="ColorCell_1" align="right">двигатель</td><td class="ColorCell_2" align="left">5</td><td class="ColorCell_1" align="right">передняя часть</td><td class="ColorCell_2" align="left">5</td></tr><tr><td class="ColorCell_1" align="right" width="90">объем</td><td class="ColorCell_2" align="left">1100</td><td class="ColorCell_1" align="right">цена кон.</td><td class="ColorCell_2" align="left">190</td><td class="ColorCell_1" align="right">электроника</td><td class="ColorCell_2" align="left">5</td><td class="ColorCell_1" align="right">задняя часть</td><td class="ColorCell_2" align="left">5</td></tr><tr><td class="ColorCell_1" align="right">год</td><td class="ColorCell_2" align="left">2000</td><td class="ColorCell_1" align="right">результат</td><td class="ColorCell_2" align="left">sold</td><td class="ColorCell_1" align="right">оценка рамы</td><td class="ColorCell_2" align="left">5</td><td class="ColorCell_1" align="right"></td><td class="ColorCell_2" align="left"></td></tr></tbody></table>
+				</td>
+				<td background="./6_files/info_right_border.gif"></td>
+			</tr>
+			<tr>
+				<td><img src="./6_files/info_buttom_left_corner.gif" border="0"></td>
+				<td background="./6_files/info_bottom_border.gif"></td>
+				<td><img src="./6_files/info_buttom_right_corner.gif" border="0"></td>
+			</tr>
+			</tbody></table>
+		</td></tr><tr id="block_calc"><td valign="top">
+			<table border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td><img src="./6_files/info_top_left_corner.gif" border="0"></td>
+				<td background="./6_files/info_top_border.gif">
+					<b>
+		<div class="Verdana16px">Калькулятор стоимости мотоцикла</div>
+					</b>
+				</td>
+				<td><img src="./6_files/info_top_right_corner.gif" border="0"></td>
+			</tr>
+			<tr>
+				<td background="./6_files/info_left_border.gif"></td>
+				<td class="ColorBgInfo">
+		<table width="730" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td align="center"><iframe id="calc_frame" src="./6_files/newcalc.html" frameborder="0" width="100%" height="256"></iframe></td></tr></tbody></table>
+				</td>
+				<td background="./6_files/info_right_border.gif"></td>
+			</tr>
+			<tr>
+				<td><img src="./6_files/info_buttom_left_corner.gif" border="0"></td>
+				<td background="./6_files/info_bottom_border.gif"></td>
+				<td><img src="./6_files/info_buttom_right_corner.gif" border="0"></td>
+			</tr>
+			</tbody></table>
+		</td></tr></tbody></table></td><td valign="top"><table border="0" cellpadding="4" cellspacing="0" class="Verdana12px"><tbody><tr><td valign="top"></td></tr></tbody></table></td></tr></tbody></table>
+				</td>
+				<td background="./6_files/lsf_right_border.gif"></td>
+			</tr>
+			<tr>
+				<td background="./6_files/lsf_bottom_border.gif"></td>
+				<td height="25"><img src="./6_files/lsf_bottom_right_corner.gif"></td>
+			</tr>
+			</tbody></table>
+		<script language="Javascript" type="text/javascript">
+		loadPhoto();
+	</script>
+	</td>
+</tr>
+</tbody></table>
+
+
+		<div id="footer">
+			<div id="footer_cont">
+				<p>© 2008 «Самурай - авто». Все права защищены.</p>
+        		<p> г. Екатеринбург ул. Гурзуфская д. 48 А оф.32 Тел. +7 (343) 219-93-99 ; +7-952-72-92-129, e-mail:
+        		<a href="mailto:samurai-motor@mail.ru">samurai-motor@mail.ru</a>&nbsp; </p>
+				<p align="center">&nbsp;
+		</p></div>
+			</div>
+		</td>
+	</tr>
+	</tbody></table>
+
+
+
+<div class="highslide-container" style="padding: 0px; border: none; margin: 0px; position: absolute; left: 0px; top: 0px; width: 100%; z-index: 1001; direction: ltr;"><a class="highslide-loading" title="Click to cancel" href="javascript:;" style="position: absolute; top: -9999px; opacity: 0.75; z-index: 1;">Loading...</a><div style="display: none;"></div><img src="./6_files/rounded-white.png" style="padding: 0px; border: none; margin: 0px; position: absolute; top: -9999px;"><img src="./6_files/rounded-white.png" style="padding: 0px; border: none; margin: 0px; position: absolute; top: -9999px;"><table cellspacing="0" style="padding: 0px; border: none; margin: 0px; visibility: hidden; position: absolute; border-collapse: collapse; width: 0px;"><tbody style="padding: 0px; border: none; margin: 0px;"><tr style="padding: 0px; border: none; margin: 0px; height: auto;"><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://auc.samurai-motor.ru/static/js/highslide/graphics/outlines/rounded-white.png&quot;) 0px 0px; height: 20px; width: 20px;"></td><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://auc.samurai-motor.ru/static/js/highslide/graphics/outlines/rounded-white.png&quot;) 0px -40px; height: 20px; width: 20px;"></td><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://auc.samurai-motor.ru/static/js/highslide/graphics/outlines/rounded-white.png&quot;) -20px 0px; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border: none; margin: 0px; height: auto;"><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://auc.samurai-motor.ru/static/js/highslide/graphics/outlines/rounded-white.png&quot;) 0px -80px; height: 20px; width: 20px;"></td><td class="rounded-white highslide-outline" style="padding: 0px; border: none; margin: 0px; position: relative;"></td><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://auc.samurai-motor.ru/static/js/highslide/graphics/outlines/rounded-white.png&quot;) -20px -80px; height: 20px; width: 20px;"></td></tr><tr style="padding: 0px; border: none; margin: 0px; height: auto;"><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://auc.samurai-motor.ru/static/js/highslide/graphics/outlines/rounded-white.png&quot;) 0px -20px; height: 20px; width: 20px;"></td><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://auc.samurai-motor.ru/static/js/highslide/graphics/outlines/rounded-white.png&quot;) 0px -60px; height: 20px; width: 20px;"></td><td style="padding: 0px; border: none; margin: 0px; line-height: 0; font-size: 0px; background: url(&quot;http://auc.samurai-motor.ru/static/js/highslide/graphics/outlines/rounded-white.png&quot;) -20px -20px; height: 20px; width: 20px;"></td></tr></tbody></table><img src="./6_files/rounded-white.png" style="padding: 0px; border: none; margin: 0px; position: absolute; top: -9999px;"></div></body></html>

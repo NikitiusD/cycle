@@ -1,0 +1,160 @@
+/*--------------------------------------------------------------------------*/
+/*  PopUp JavaScript, version 1.0
+ *  (c) 2008 Бояркин ЮРИЙ <zmeinka@rambler.ru>
+/*--------------------------------------------------------------------------*/
+
+/**
+ *
+ */
+function showTips( help_id, popWidth, popHeight ) {
+	popup_content.innerHTML = '<iframe src="/files/help/'+help_id+'.html" height="100%" width="100%" marginheight="0" frameborder="0"/>';
+	showPopWin(popWidth, popHeight);
+}
+
+
+var gPopupIsShown = false;
+var yPos=0;
+
+/**
+ * Показать всплывающее окно.
+ */
+function showPopWin(width, height) {
+	
+	// флаг
+	gPopupIsShown = true;
+
+	// установить размеры PopUp
+	popupContainer.style.width = width + "px";
+	popupContainer.style.height = height + "px";
+	
+	// установить место вывода PopUp
+	centerPopWin(width, height);
+	
+	// for IE
+	if (window.navigator.userAgent.indexOf("MSIE") > -1) {
+		if (self.pageYOffset) {
+			yPos = self.pageYOffset;
+		}else if (document.documentElement && document.documentElement.scrollTop){
+			yPos = document.documentElement.scrollTop; 
+		} else if (document.body) {
+			yPos = document.body.scrollTop;
+		}
+		
+		window.scrollTo(0, 0);
+	}
+	
+	// показать скрытые элементы
+	popupMask.style.display = "block";
+	popupContainer.style.display = "block";
+}
+
+/**
+ * Скрыть всплывающее окно.
+ */
+function hidePopWin() {
+
+	// флаг
+	gPopupIsShown = false;
+
+	var theBody = document.getElementsByTagName("BODY")[0];
+	theBody.style.overflow = "";
+
+	popupMask.style.display = "none";
+	popupContainer.style.display = "none";
+	// for IE
+	if (window.navigator.userAgent.indexOf("MSIE") > -1) window.scrollTo(0, yPos);
+}
+
+/**
+ * Установить всплывающее окно по центру.
+ */
+function centerPopWin(width, height) {
+
+	if (gPopupIsShown == true) {
+		if (width == null || isNaN(width)) width = popupContainer.offsetWidth;
+		if (height == null) height = popupContainer.offsetHeight;
+	
+		var theBody = document.getElementsByTagName("BODY")[0];
+		theBody.style.overflow = "hidden";
+	
+		var scTop = parseInt(theBody.scrollTop,10);
+		var scLeft = parseInt(theBody.scrollLeft,10);
+	
+		popupMask.style.top = scTop + "px";
+		popupMask.style.left = scLeft + "px";
+	
+		//установить размер маски
+		setMaskSize();
+	
+		var fullHeight = getViewportHeight();
+		var fullWidth = getViewportWidth();
+	
+		if (scTop + ((fullHeight - height) / 2)<0) popupContainer.style.top ="0px";
+		else popupContainer.style.top = (scTop + ((fullHeight - height) / 2)) + "px"; popupContainer.style.left =  (scLeft + ((fullWidth - width) / 2)) + "px";
+	}
+}
+
+/**
+ * Установить размер маски.
+ */
+function setMaskSize() {
+	var theBody = document.getElementsByTagName("BODY")[0];
+	
+	var fullHeight = getViewportHeight();
+	var fullWidth = getViewportWidth();
+	
+	// Determine what's bigger, scrollHeight or fullHeight / width
+	if (fullHeight > theBody.scrollHeight) {
+		popHeight = fullHeight;
+	} else {
+		popHeight = theBody.scrollHeight;
+	}
+	
+	if (fullWidth > theBody.scrollWidth) {
+		popWidth = fullWidth;
+	}else{
+		popWidth = theBody.scrollWidth;
+	}
+	
+	popupMask.style.height = popHeight + "px";
+	popupMask.style.width = popWidth + "px";
+}
+
+/**
+ * Получить текущую высоту окна.
+ */
+function getViewportHeight() {
+	if (window.innerHeight!=window.undefined) return window.innerHeight;
+	if (document.compatMode=='CSS1Compat') return document.documentElement.clientHeight;
+	if (document.body) return document.body.clientHeight; 
+	return window.undefined; 
+}
+
+/**
+ * Получить текущую ширину окна.
+ */
+function getViewportWidth() {
+	if (window.innerWidth!=window.undefined) return window.innerWidth; 
+	if (document.compatMode=='CSS1Compat') return document.documentElement.clientWidth; 
+	if (document.body) return document.body.clientWidth; 
+	return window.undefined; 
+}
+
+/**
+ * Установить обработчик события
+ */
+function addEvent(obj, evType, fn){
+	if (obj.addEventListener){
+		obj.addEventListener(evType, fn, false);
+		return true;
+	}else if (obj.attachEvent){
+		var r = obj.attachEvent("on"+evType, fn);
+		return r;
+	}else{
+		return false;
+	}
+}
+
+addEvent( window, "resize", centerPopWin );
+//addEvent(window, "scroll", centerPopWin);
+window.onscroll = centerPopWin;

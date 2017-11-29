@@ -15,10 +15,12 @@ namespace Parser
         {
             var pageSourceCodeArray = Directory.GetFiles(@"C:\Projects\Moto\HTMLs", "*.html");
 
-            var cycles = pageSourceCodeArray.Select(GetPageCode).Select(CreateNewCycle).ToList();
+            var cycles = pageSourceCodeArray.Select(GetPageCode).Select(CreateNewCycle);
 
             foreach (var cycle in cycles)
                 Console.WriteLine(cycle);
+
+            var doc = new XMLdocument(cycles);
         }
 
         private static Cycle CreateNewCycle(IHtmlDocument pageCode) => new Cycle(pageCode, Rate);
@@ -43,7 +45,7 @@ namespace Parser
 
         private static IHtmlDocument GetCalcCode()
         {
-            var calcSourceCode = Directory.GetFiles(@"C:\Projects\Moto\HTMLs\Samurai Motor_ Мото статистика_files", "newcalc.html")[0];
+            var calcSourceCode = Directory.GetFiles(@"C:\Projects\Moto", "newcalc.html")[0];
             var document = File.ReadAllText(calcSourceCode);
             var parser = new HtmlParser();
             var calcCode = parser.Parse(document);

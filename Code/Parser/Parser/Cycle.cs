@@ -9,14 +9,14 @@ namespace Parser
     {
         private readonly Dictionary<string, double> rate;
         private readonly IHtmlDocument pageCode;
-        private string cycleMark;
-        private string cycleModel;
-        private string run;
-        private string year;
-        private string price;
-        private string color;
-        private string volume;
-        private string[] picturesList;
+        public string cycleMark;
+        public string cycleModel;
+        public string run;
+        public string year;
+        public string price;
+        public string color;
+        public string volume;
+        public string[] picturesList;
 
         public Cycle(IHtmlDocument pageCode, Dictionary<string, double> rate)
         {
@@ -43,8 +43,8 @@ namespace Parser
         private void GetPrice(int cost)
         {
             var custom = GetCustom(int.Parse(year), int.Parse(volume));
-            var price =
-            (((cost + 60500) / rate["USDtoJPN"] * 1.01 + custom * 0.4) * rate["USDtoRUB"] + 9000 + 0) * 1.1;
+            var price = (((cost + 60500) / rate["USDtoJPN"] * 1.01 + custom * 0.4) * rate["USDtoRUB"] + 9000 + 0) * 1.1;
+            price += 1000 - price % 1000;
             this.price = ((int)price).ToString();
         }
 
@@ -622,6 +622,13 @@ namespace Parser
                 ? cycleName[1].Remove(cycleName[1].ToLower().IndexOf(cycleMark.ToLower()), cycleMark.Length + 1)
                 : cycleName[1];
 
+            var k = new List<int>();
+            for (var i = 0; i < cycleModel.Length; i++)
+                if (char.IsDigit(cycleModel[i]))
+                    k.Add(i);
+
+            cycleModel = cycleModel.Substring(0, k[0]) + " " + cycleModel.Substring(k[0], k.Last() - k[0] + 1) + " " + cycleModel.Substring(k.Last() + 1);
+            cycleModel = cycleModel.Replace("  ", " ");
         }
 
         private void GetPicturesLinks(IHtmlDocument doc)
