@@ -13,14 +13,20 @@ namespace Parser
 
         static void Main(string[] args)
         {
-            var pageSourceCodeArray = Directory.GetFiles(@"C:\Projects\Moto\HTMLs", "*.html");
+            Console.WriteLine("Please enter \"test\" if you want to test\nOtherwise just press Enter");
+            var isTest = !string.IsNullOrEmpty(Console.ReadLine());
+            var pageSourceCodeArray = isTest
+                ? Directory.GetFiles(@"C:\Projects\Moto\HTMLsTest", "*.html")
+                : Directory.GetFiles(@"C:\Projects\Moto\HTMLs", "*.html");
+            //var pageSourceCodeArray = Directory.GetFiles(@"C:\Projects\Moto\HTMLsTest", "*.html");
+            //var pageSourceCodeArray = Directory.GetFiles(@"C:\Projects\Moto\HTMLs", "*.html");
 
             var cycles = pageSourceCodeArray.Select(GetPageCode).Select(CreateNewCycle);
 
             foreach (var cycle in cycles)
                 Console.WriteLine(cycle);
 
-            var doc = new XMLdocument(cycles);
+            var doc = new XMLDocument(cycles);
         }
 
         private static Cycle CreateNewCycle(IHtmlDocument pageCode) => new Cycle(pageCode, Rate);
@@ -45,11 +51,15 @@ namespace Parser
 
         private static IHtmlDocument GetCalcCode()
         {
-            var calcSourceCode = Directory.GetFiles(@"C:\Projects\Moto", "newcalc.html")[0];
+            Console.WriteLine("Please enter the relative from \"C:\\Projects\\Moto\\HTMLs\" path\nto the newcalc.html file\nIf it's \"1_files\" then just press Enter");
+            var newcalcPath = Console.ReadLine();
+            const string absolutePathToNewCalc = "C:\\Projects\\Moto\\HTMLs\\";
+            var calcSourceCode = string.IsNullOrEmpty(newcalcPath)
+                        ? Directory.GetFiles($"{absolutePathToNewCalc}1_files", "newcalc.html")[0]
+                        : Directory.GetFiles($"{absolutePathToNewCalc}{newcalcPath}", "newcalc.html")[0];
             var document = File.ReadAllText(calcSourceCode);
             var parser = new HtmlParser();
             var calcCode = parser.Parse(document);
-
             return calcCode;
         }
 

@@ -1,5 +1,5 @@
 
-<!-- saved from url=(0072)http://auc.samurai-motor.ru/newcalc?year=2005&displacement=1100&resize=1 -->
+<!-- saved from url=(0072)http://auc.samurai-motor.ru/newcalc?year=2007&displacement=1200&resize=1 -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <style type="text/css">
@@ -77,7 +77,7 @@
 			if (typeof(sajax_request_type) == "undefined" || sajax_request_type == "") 
 				sajax_request_type = "GET";
 			
-			uri = "/newcalc/?year=2005&displacement=1100&resize=1";
+			uri = "/newcalc/?year=2007&displacement=1200&resize=1";
 			if (sajax_request_type == "GET") {
 			
 				if (uri.indexOf("?") == -1) 
@@ -275,7 +275,7 @@
 
         function putDisplacementListJs(html) {
             document.getElementById('displacement_hv').innerHTML = html;
-            select_text("displacement_hv_control_element","1100");selectMotoDateList();parent.frame_resize("calc_frame");        }
+            select_text("displacement_hv_control_element","1300");selectMotoDateList();parent.frame_resize("calc_frame");        }
 
         function selectMotoDateList() {
             document.getElementById('motodate_hv').innerHTML = '';
@@ -285,7 +285,7 @@
 
         function putMotoDateListJs(html) {
             document.getElementById('motodate_hv').innerHTML = html;
-            select_value("motodate_hv_control_element","2005");getPrice();        }
+            select_value("motodate_hv_control_element","2007");getPrice();        }
 
         function putCurrencyJs(html) {
             document.getElementById('currency_hv').innerHTML = html;
@@ -412,27 +412,27 @@
         <td width="33%">Год выпуска:</td>
         <td id="motodate_hv"><select style="width: 100%;" id="motodate_hv_control_element" onchange="getPrice();">
     <option value="0"></option>
-    <option value="1296">1996</option>
-    <option value="1784">1997</option>
-    <option value="1784">1998</option>
-    <option value="1784">1999</option>
-    <option value="1784">2000</option>
-    <option value="2036">2001</option>
-    <option value="2036">2002</option>
-    <option value="2036">2003</option>
-    <option value="2036">2004</option>
-    <option value="2817">2005</option>
-    <option value="2817">2006</option>
-    <option value="2817">2007</option>
-    <option value="3201">2008</option>
-    <option value="3201">2009</option>
-    <option value="3201">2010</option>
-    <option value="4784">2011</option>
-    <option value="4784">2012</option>
-    <option value="6411">2013</option>
-    <option value="6411">2014</option>
-    <option value="7765">2015</option>
-    <option value="7765">2016</option>
+    <option value="1368">1996</option>
+    <option value="1914">1997</option>
+    <option value="1914">1998</option>
+    <option value="1914">1999</option>
+    <option value="1914">2000</option>
+    <option value="2161">2001</option>
+    <option value="2161">2002</option>
+    <option value="2161">2003</option>
+    <option value="2161">2004</option>
+    <option value="3016">2005</option>
+    <option value="3016">2006</option>
+    <option value="3016">2007</option>
+    <option value="3265">2008</option>
+    <option value="3265">2009</option>
+    <option value="3265">2010</option>
+    <option value="5011">2011</option>
+    <option value="5011">2012</option>
+    <option value="6996">2013</option>
+    <option value="6996">2014</option>
+    <option value="8569">2015</option>
+    <option value="8569">2016</option>
 </select>
 </td>
         <td>

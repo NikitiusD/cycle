@@ -5,47 +5,46 @@ using AngleSharp.Dom.Html;
 
 namespace Parser
 {
-    class Cycle
+    internal class Cycle
     {
         private readonly Dictionary<string, double> rate;
         private readonly IHtmlDocument pageCode;
-        public string cycleMark;
-        public string cycleModel;
-        public string run;
-        public string year;
-        public string price;
-        public string color;
-        public string volume;
-        public string[] picturesList;
+        public string CycleMark;
+        public string CycleModel;
+        public string Run;
+        public string Year;
+        public string Price;
+        public string Color;
+        public string Volume;
+        public string[] PicturesList;
 
         public Cycle(IHtmlDocument pageCode, Dictionary<string, double> rate)
         {
             this.pageCode = pageCode;
             this.rate = rate;
-            this.GetAllFields();
+            GetAllFields();
         }
 
         private void GetAllFields()
         {
             var info = pageCode.QuerySelectorAll("td.ColorCell_2").Select(e => e.TextContent).ToArray();
             var cycleInfo = new[] { info[1], info[4], info[8], info[9], info[12] };
-            GetCycleName(pageCode);
-
-            run = cycleInfo[1].Where(char.IsDigit).Aggregate("", (current, c) => current + c);
-            year = cycleInfo[4];
+            GetCycleName();
+            Run = cycleInfo[1].Where(char.IsDigit).Aggregate("", (current, c) => current + c);
+            Year = cycleInfo[4];
             var cost = cycleInfo[3] + "000";
-            volume = cycleInfo[2];
+            Volume = cycleInfo[2];
             GetPrice(int.Parse(cost));
             GetColor(cycleInfo[0]);
-            GetPicturesLinks(pageCode);
+            GetPicturesLinks();
         }
 
         private void GetPrice(int cost)
         {
-            var custom = GetCustom(int.Parse(year), int.Parse(volume));
+            var custom = GetCustom(int.Parse(Year), int.Parse(Volume));
             var price = (((cost + 60500) / rate["USDtoJPN"] * 1.01 + custom * 0.4) * rate["USDtoRUB"] + 9000 + 0) * 1.1;
             price += 1000 - price % 1000;
-            this.price = ((int)price).ToString();
+            Price = ((int)price).ToString();
         }
 
         private int GetCustom(int year, int volume)
@@ -579,7 +578,7 @@ namespace Parser
 
         private void GetColor(string cycleInfo)
         {
-            var colorSet = new Dictionary<string, string>
+            var colors = new Dictionary<string, string>
             {
                 {"BEIGE", "Бежевый"},
                 {"WHITE", "Белый"},
@@ -600,61 +599,55 @@ namespace Parser
                 {"GUNMETAL", "Серый"},
                 {"WINE", "Красный"}
             };
-            color = "";
-            var colors = cycleInfo.Split('/', '|', ' ');
-            foreach (var colo in colors)
+            var cycleColors = cycleInfo.Split('/', '|', ' ');
+            foreach (var cycleColor in cycleColors)
             {
-                foreach (var col in colorSet)
+                foreach (var color in colors)
                 {
-                    if (col.Key == colo)
-                        color = col.Value;
+                    if (color.Key == cycleColor)
+                        Color = color.Value;
                 }
             }
 
-            if (color == "") Console.WriteLine($"Can't identify color at {cycleMark} {cycleModel} {year}");
+            if (Color.Length == 0) Console.WriteLine($"Can't identify color at {CycleMark} {CycleModel} {Year}");
         }
 
-        private void GetCycleName(IHtmlDocument pageCode)
+        private void GetCycleName()
         {
             var cycleName = pageCode.QuerySelectorAll("div.Verdana16px").Select(e => e.TextContent).ToArray()[1].Split('\u00A0');
-            cycleMark = cycleName[0];
-            cycleModel = cycleName[1].ToLower().Contains(cycleMark.ToLower())
-                ? cycleName[1].Remove(cycleName[1].ToLower().IndexOf(cycleMark.ToLower()), cycleMark.Length + 1)
+
+            CycleMark = cycleName[0];
+            CycleModel = cycleName[1].ToLower().Contains(CycleMark.ToLower())
+                ? cycleName[1].Remove(cycleName[1].ToLower().IndexOf(CycleMark.ToLower()), CycleMark.Length + 1)
                 : cycleName[1];
 
-            var k = new List<int>();
-            for (var i = 0; i < cycleModel.Length; i++)
-                if (char.IsDigit(cycleModel[i]))
-                    k.Add(i);
+            var posOfDigits = new List<int>();
 
-            cycleModel = cycleModel.Substring(0, k[0]) + " " + cycleModel.Substring(k[0], k.Last() - k[0] + 1) + " " + cycleModel.Substring(k.Last() + 1);
-            cycleModel = cycleModel.Replace("  ", " ");
+            for (var i = 0; i < CycleModel.Length; i++)
+                if (char.IsDigit(CycleModel[i]))
+                    posOfDigits.Add(i);
+
+            CycleModel = CycleModel.Substring(0, posOfDigits.First()) + " " + CycleModel.Substring(posOfDigits.First(), posOfDigits.Last() - posOfDigits.First() + 1) + " " + CycleModel.Substring(posOfDigits.Last() + 1);
+            CycleModel = CycleModel.Replace("  ", " ");
         }
 
-        private void GetPicturesLinks(IHtmlDocument doc)
+        private void GetPicturesLinks()
         {
-            var imagesCode = doc.QuerySelectorAll("img").Where(item => item.Id != null && item.Id.Contains("url_img_")).ToArray();
-            List<string> picturesLinksList = new List<string>();
+            var imagesCode = pageCode.QuerySelectorAll("img").Where(item => item.Id != null && item.Id.Contains("url_img_")).ToArray();
+
+            var picturesLinksList = new List<string>();
             picturesLinksList.AddRange(imagesCode.Select(element => element.GetAttribute("load_src")));
             picturesLinksList.RemoveAt(0);
-            picturesList = picturesLinksList.ToArray();
-        }
 
-        public Cycle(string cycleMark, string cycleModel, string run, string year, string price, string color, string volume, string[] picturesList)
-        {
-            this.cycleMark = cycleMark;
-            this.cycleModel = cycleModel;
-            this.run = run;
-            this.year = year;
-            this.price = price;
-            this.color = color;
-            this.volume = volume;
-            this.picturesList = picturesList;
+            for (var i = 0; i < picturesLinksList.Count; i++)
+                picturesLinksList[i] = picturesLinksList[i].Substring(0, picturesLinksList[i].LastIndexOf('\u0026'));
+
+            PicturesList = picturesLinksList.ToArray();
         }
 
         public override string ToString()
         {
-            return $"Cycle Mark: {cycleMark}\nCycle Model: {cycleModel}\nRun: {run} km\nYear: {year}\nPrice: {price}\nColor: {color}\nVolume: {volume}\nPictures: {picturesList.Length}\n";
+            return $"Cycle Mark: {CycleMark}\nCycle Model: {CycleModel}\nRun: {Run} km\nYear: {Year}\nPrice: {Price}\nColor: {Color}\nVolume: {Volume}\nPictures: {PicturesList.Length}\n";
         }
     }
 }
