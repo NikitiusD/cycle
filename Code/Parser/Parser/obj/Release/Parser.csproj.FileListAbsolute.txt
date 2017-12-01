@@ -1,0 +1,8 @@
+C:\Projects\Moto\Code\Parser\Parser\bin\Release\Parser.exe.config
+C:\Projects\Moto\Code\Parser\Parser\bin\Release\Parser.exe
+C:\Projects\Moto\Code\Parser\Parser\bin\Release\Parser.pdb
+C:\Projects\Moto\Code\Parser\Parser\bin\Release\AngleSharp.dll
+C:\Projects\Moto\Code\Parser\Parser\bin\Release\AngleSharp.xml
+C:\Projects\Moto\Code\Parser\Parser\obj\Release\Parser.csproj.CoreCompileInputs.cache
+C:\Projects\Moto\Code\Parser\Parser\obj\Release\Parser.exe
+C:\Projects\Moto\Code\Parser\Parser\obj\Release\Parser.pdb

@@ -1,27 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
 
 namespace Parser
 {
-    class Rate
+    internal class Rate
     {
-        public double USDtoJPN;
-        public double USDtoRUB;
-        public double EURtoRUB;
+        public readonly double USDtoJPN;
+        public readonly double USDtoRUB;
+        public readonly double EURtoRUB;
 
         public Rate()
         {
             var calcCode = GetCalcCode();
 
-            USDtoJPN = double.Parse(calcCode.QuerySelectorAll("span#usdjpy_curr")[0].TextContent);
-            USDtoRUB = double.Parse(calcCode.QuerySelectorAll("span#usd_curr")[0].TextContent);
-            EURtoRUB = double.Parse(calcCode.QuerySelectorAll("span#euro_curr")[0].TextContent);
+            USDtoJPN = double.Parse(calcCode.QuerySelectorAll("span#usdjpy_curr")[0].TextContent.Replace('.', ','));
+            USDtoRUB = double.Parse(calcCode.QuerySelectorAll("span#usd_curr")[0].TextContent.Replace('.', ','));
+            EURtoRUB = double.Parse(calcCode.QuerySelectorAll("span#euro_curr")[0].TextContent.Replace('.', ','));
         }
 
         private static IHtmlDocument GetCalcCode()

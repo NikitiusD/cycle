@@ -7,7 +7,7 @@ namespace Parser
 {
     internal class Cycle
     {
-        private readonly Dictionary<string, double> rate;
+        private readonly Rate rate;
         private readonly IHtmlDocument pageCode;
         public string CycleMark;
         public string CycleModel;
@@ -18,7 +18,7 @@ namespace Parser
         public string Volume;
         public string[] PicturesList;
 
-        public Cycle(IHtmlDocument pageCode, Dictionary<string, double> rate)
+        public Cycle(IHtmlDocument pageCode, Rate rate)
         {
             this.pageCode = pageCode;
             this.rate = rate;
@@ -42,9 +42,96 @@ namespace Parser
         private void GetPrice(int cost)
         {
             var custom = GetCustom(int.Parse(Year), int.Parse(Volume));
-            var price = (((cost + 60500) / rate["USDtoJPN"] * 1.01 + custom * 0.4) * rate["USDtoRUB"] + 9000 + 0) * 1.1;
+            var price = (((cost + 60500) / rate.USDtoJPN * 1.01 + custom * 0.4) * rate.USDtoRUB + 9000 + 0) * 1.1;
             price += 1000 - price % 1000;
             Price = ((int)price).ToString();
+        }
+
+        private void GetColor(string cycleInfo)
+        {
+            var colors = new Dictionary<string, string>
+            {
+                {"BEIGE", "Бежевый"},
+                {"WHITE", "Белый"},
+                {"BLUE", "Синий"},
+                {"YELLOW", "Желтый"},
+                {"GREEN", "Зеленый"},
+                {"GOLD", "Золотой"},
+                {"BROWN", "Коричневый"},
+                {"RED", "Красный"},
+                {"ORANGE", "Оранжевый"},
+                {"PURPLE", "Фиолетовый"},
+                {"PINK", "Розовый"},
+                {"SILVER", "Серебряный"},
+                {"GRAY", "Серый"},
+                {"VIOLET", "Фиолетовый"},
+                {"BLACK", "Черный"},
+                {"CREAM", "Бежевый"},
+                {"GUNMETAL", "Серый"},
+                {"WINE", "Красный"}
+            };
+            var cycleColors = cycleInfo.Split('/', '|', ' ');
+            foreach (var cycleColor in cycleColors)
+            {
+                foreach (var color in colors)
+                {
+                    if (color.Key == cycleColor)
+                        Color = color.Value;
+                }
+            }
+
+            if (string.IsNullOrEmpty(Color)) Console.WriteLine($"\n!!!\nCan't identify color at {CycleMark} {CycleModel} {Year}\n!!!\n");
+        }
+
+        private void GetCycleName()
+        {
+            var cycleName = pageCode.QuerySelectorAll("div.Verdana16px").Select(e => e.TextContent).ToArray()[1].Split('\u00A0');
+
+            CycleMark = cycleName[0];
+            CycleModel = cycleName[1].ToLower().Contains(CycleMark.ToLower())
+                ? cycleName[1].Remove(cycleName[1].ToLower().IndexOf(CycleMark.ToLower()), CycleMark.Length + 1)
+                : cycleName[1];
+
+            var posOfDigits = new List<int>();
+
+            for (var i = 0; i < CycleModel.Length; i++)
+                if (char.IsDigit(CycleModel[i]))
+                    posOfDigits.Add(i);
+
+            CycleModel = CycleModel.Substring(0, posOfDigits.First()) + " " + CycleModel.Substring(posOfDigits.First(), posOfDigits.Last() - posOfDigits.First() + 1) + " " + CycleModel.Substring(posOfDigits.Last() + 1);
+            CycleModel = CycleModel.Replace("  ", " ");
+        }
+
+        private void GetPicturesLinks()
+        {
+            var imagesCode = pageCode.QuerySelectorAll("img").Where(item => item.Id != null && item.Id.Contains("url_img_")).ToArray();
+
+            var picturesLinksList = new List<string>();
+            picturesLinksList.AddRange(imagesCode.Select(element => element.GetAttribute("load_src")));
+            picturesLinksList.RemoveAt(0);
+
+            for (var i = 0; i < picturesLinksList.Count; i++)
+                picturesLinksList[i] = picturesLinksList[i].Substring(0, picturesLinksList[i].LastIndexOf('\u0026'));
+
+            PicturesList = picturesLinksList.ToArray();
+        }
+
+        public override string ToString()
+        {
+            return $"Cycle Mark: {CycleMark}\nCycle Model: {CycleModel}\nRun: {Run} km\nYear: {Year}\nPrice: {Price}\nColor: {Color}\nVolume: {Volume}\nPictures: {PicturesList.Length}\n";
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Cycle cycle &&
+                   CycleMark == cycle.CycleMark &&
+                   CycleModel == cycle.CycleModel &&
+                   Run == cycle.Run &&
+                   Year == cycle.Year &&
+                   Price == cycle.Price &&
+                   Color == cycle.Color &&
+                   Volume == cycle.Volume &&
+                   EqualityComparer<string[]>.Default.Equals(PicturesList, cycle.PicturesList);
         }
 
         private int GetCustom(int year, int volume)
@@ -574,80 +661,6 @@ namespace Parser
                         return 1466;
                 }
             }
-        }
-
-        private void GetColor(string cycleInfo)
-        {
-            var colors = new Dictionary<string, string>
-            {
-                {"BEIGE", "Бежевый"},
-                {"WHITE", "Белый"},
-                {"BLUE", "Синий"},
-                {"YELLOW", "Желтый"},
-                {"GREEN", "Зеленый"},
-                {"GOLD", "Золотой"},
-                {"BROWN", "Коричневый"},
-                {"RED", "Красный"},
-                {"ORANGE", "Оранжевый"},
-                {"PURPLE", "Фиолетовый"},
-                {"PINK", "Розовый"},
-                {"SILVER", "Серебряный"},
-                {"GRAY", "Серый"},
-                {"VIOLET", "Фиолетовый"},
-                {"BLACK", "Черный"},
-                {"CREAM", "Бежевый"},
-                {"GUNMETAL", "Серый"},
-                {"WINE", "Красный"}
-            };
-            var cycleColors = cycleInfo.Split('/', '|', ' ');
-            foreach (var cycleColor in cycleColors)
-            {
-                foreach (var color in colors)
-                {
-                    if (color.Key == cycleColor)
-                        Color = color.Value;
-                }
-            }
-
-            if (Color.Length == 0) Console.WriteLine($"Can't identify color at {CycleMark} {CycleModel} {Year}");
-        }
-
-        private void GetCycleName()
-        {
-            var cycleName = pageCode.QuerySelectorAll("div.Verdana16px").Select(e => e.TextContent).ToArray()[1].Split('\u00A0');
-
-            CycleMark = cycleName[0];
-            CycleModel = cycleName[1].ToLower().Contains(CycleMark.ToLower())
-                ? cycleName[1].Remove(cycleName[1].ToLower().IndexOf(CycleMark.ToLower()), CycleMark.Length + 1)
-                : cycleName[1];
-
-            var posOfDigits = new List<int>();
-
-            for (var i = 0; i < CycleModel.Length; i++)
-                if (char.IsDigit(CycleModel[i]))
-                    posOfDigits.Add(i);
-
-            CycleModel = CycleModel.Substring(0, posOfDigits.First()) + " " + CycleModel.Substring(posOfDigits.First(), posOfDigits.Last() - posOfDigits.First() + 1) + " " + CycleModel.Substring(posOfDigits.Last() + 1);
-            CycleModel = CycleModel.Replace("  ", " ");
-        }
-
-        private void GetPicturesLinks()
-        {
-            var imagesCode = pageCode.QuerySelectorAll("img").Where(item => item.Id != null && item.Id.Contains("url_img_")).ToArray();
-
-            var picturesLinksList = new List<string>();
-            picturesLinksList.AddRange(imagesCode.Select(element => element.GetAttribute("load_src")));
-            picturesLinksList.RemoveAt(0);
-
-            for (var i = 0; i < picturesLinksList.Count; i++)
-                picturesLinksList[i] = picturesLinksList[i].Substring(0, picturesLinksList[i].LastIndexOf('\u0026'));
-
-            PicturesList = picturesLinksList.ToArray();
-        }
-
-        public override string ToString()
-        {
-            return $"Cycle Mark: {CycleMark}\nCycle Model: {CycleModel}\nRun: {Run} km\nYear: {Year}\nPrice: {Price}\nColor: {Color}\nVolume: {Volume}\nPictures: {PicturesList.Length}\n";
         }
     }
 }
