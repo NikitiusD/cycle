@@ -6,3 +6,5 @@ C:\Projects\Moto\Code\Parser\Parser\bin\Release\AngleSharp.xml
 C:\Projects\Moto\Code\Parser\Parser\obj\Release\Parser.csproj.CoreCompileInputs.cache
 C:\Projects\Moto\Code\Parser\Parser\obj\Release\Parser.exe
 C:\Projects\Moto\Code\Parser\Parser\obj\Release\Parser.pdb
+C:\Projects\Moto\Code\Parser\Parser\bin\Release\xnet.dll
+C:\Projects\Moto\Code\Parser\Parser\obj\Release\Parser.csprojResolveAssemblyReference.cache

@@ -14,9 +14,12 @@ namespace Parser
         {
             Console.WriteLine("Please enter something if you want to test\nOtherwise just press Enter");
             var isTest = !string.IsNullOrEmpty(Console.ReadLine());
-            var pageSourceCodeArray = isTest
-                ? Directory.GetFiles(@"C:\Projects\Moto\HTMLsTest", "*.html")
-                : Directory.GetFiles(@"C:\Projects\Moto\HTMLs", "*.html");
+
+            var pagesContent = isTest
+                ? new PagesContent("C:\\Projects\\Moto\\cycles_test.txt")
+                : new PagesContent("C:\\Projects\\Moto\\cycles.txt");
+
+            var pageSourceCodeArray = pagesContent.Pages.ToArray();
 
             var cycles = pageSourceCodeArray.Select(GetPageCode).Select(CreateNewCycle);
 
@@ -33,8 +36,7 @@ namespace Parser
 
         private static IHtmlDocument GetPageCode(string pageSourceCode)
         {
-            var document = File.ReadAllText(pageSourceCode);
-            document = document.Substring(document.IndexOf("<table border=\"0\" cellpadding=\"4\" cellspacing=\"0\" class=\"Verdana12px\"><tbody>"));
+            var document = pageSourceCode.Substring(pageSourceCode.IndexOf("<table border=\"0\" cellpadding=\"4\" cellspacing=\"0\" class=\"Verdana12px\">"));
             document = document.Substring(0, document.IndexOf("</table></td><td valign=\"top\">"));
             var parser = new HtmlParser();
             var pageCode = parser.Parse(document);
