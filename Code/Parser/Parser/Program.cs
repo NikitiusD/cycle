@@ -27,7 +27,7 @@ namespace Parser
                 foreach (var cycle in cycles)
                     Console.WriteLine(cycle);
 
-            var doc = new XMLDocument(cycles);
+            var doc = new XmlDocument(cycles);
 
             if (isTest) Console.ReadKey();
         }

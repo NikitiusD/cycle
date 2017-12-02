@@ -11,17 +11,17 @@ namespace Parser
     class PagesContent
     {
         public readonly List<string> Pages = new List<string>();
-        private readonly string Path;
+        private readonly string path;
 
         public PagesContent(string path)
         {
-            Path = path;
+            this.path = path;
             GetPages();
         }
 
         private void GetPages()
         {
-            var urls = File.ReadAllLines(Path);
+            var urls = File.ReadAllLines(path);
 
             using (var request = new HttpRequest())
             {

@@ -3,17 +3,17 @@ using System.Xml.Linq;
 
 namespace Parser
 {
-    class XMLDocument
+    internal class XmlDocument
     {
         private readonly IEnumerable<Cycle> cycles;
 
-        public XMLDocument(IEnumerable<Cycle> cycles)
+        public XmlDocument(IEnumerable<Cycle> cycles)
         {
             this.cycles = cycles;
-            CreateNewXML();
+            CreateNewXml();
         }
 
-        private void CreateNewXML()
+        private void CreateNewXml()
         {
             var xdoc = new XDocument();
             var data = new XElement("data");
