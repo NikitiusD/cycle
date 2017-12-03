@@ -21,13 +21,13 @@ namespace Parser
 
             var pageSourceCodeArray = pagesContent.Pages.ToArray();
 
-            var cycles = pageSourceCodeArray.Select(GetPageCode).Select(CreateNewCycle);
+            var cycles = pageSourceCodeArray.Select(GetPageCode).Select(CreateNewCycle).Where(x => x.DataIsCorrect).Select(x => x);
 
             if (isTest)
                 foreach (var cycle in cycles)
                     Console.WriteLine(cycle);
 
-            var doc = new XmlDocument(cycles);
+            var xmlDocument = new XmlDocument(cycles);
 
             if (isTest) Console.ReadKey();
         }

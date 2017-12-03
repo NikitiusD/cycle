@@ -17,6 +17,7 @@ namespace Parser
         public string Color;
         public string Volume;
         public string[] PicturesList;
+        public bool DataIsCorrect = true;
 
         public Cycle(IHtmlDocument pageCode, Rate rate)
         {
@@ -29,6 +30,11 @@ namespace Parser
         {
             var info = pageCode.QuerySelectorAll("td.ColorCell_2").Select(e => e.TextContent).ToArray();
             var cycleInfo = new[] { info[1], info[4], info[8], info[9], info[12] };
+            if (cycleInfo.Any(string.IsNullOrEmpty))
+            {
+                DataIsCorrect = false;
+                return;
+            }
             GetCycleName();
             Run = cycleInfo[1].Where(char.IsDigit).Aggregate("", (current, c) => current + c);
             Year = cycleInfo[4];
