@@ -2,6 +2,7 @@
 using System.IO;
 using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
+using xNet.Net;
 
 namespace Parser
 {
@@ -9,26 +10,24 @@ namespace Parser
     {
         public readonly double USDtoJPN;
         public readonly double USDtoRUB;
-        public readonly double EURtoRUB;
 
         public Rate()
         {
-            var calcCode = GetCalcCode();
-
-            USDtoJPN = double.Parse(calcCode.QuerySelectorAll("span#usdjpy_curr")[0].TextContent.Replace('.', ','));
-            USDtoRUB = double.Parse(calcCode.QuerySelectorAll("span#usd_curr")[0].TextContent.Replace('.', ','));
-            EURtoRUB = double.Parse(calcCode.QuerySelectorAll("span#euro_curr")[0].TextContent.Replace('.', ','));
+            var calcCode = GetRate("https://news.yandex.ru/quotes/7.html");
+            USDtoJPN = double.Parse(calcCode.QuerySelectorAll("td.quote__value")[0].TextContent);
+            calcCode = GetRate("https://news.yandex.ru/quotes/1.html");
+            USDtoRUB = double.Parse(calcCode.QuerySelectorAll("td.quote__value")[0].TextContent);
         }
 
-        private static IHtmlDocument GetCalcCode()
+        private static IHtmlDocument GetRate(string url)
         {
-            Console.WriteLine("Please enter the relative from \"C:\\Projects\\Moto\\HTMLs\" path\nto the newcalc.html file\nIf it's \"1_files\" then just press Enter");
-            var newcalcPath = Console.ReadLine();
-            const string absolutePathToNewCalc = "C:\\Projects\\Moto\\HTMLs\\";
-            var calcSourceCode = string.IsNullOrEmpty(newcalcPath)
-                ? Directory.GetFiles($"{absolutePathToNewCalc}1_files", "newcalc.html")[0]
-                : Directory.GetFiles($"{absolutePathToNewCalc}{newcalcPath}", "newcalc.html")[0];
-            var document = File.ReadAllText(calcSourceCode);
+            string document;
+            using (var request = new HttpRequest())
+            {
+                request.UserAgent = HttpHelper.RandomChromeUserAgent();
+                var response = request.Get(url);
+                document = response.ToString();
+            }
             var parser = new HtmlParser();
             var calcCode = parser.Parse(document);
             return calcCode;
