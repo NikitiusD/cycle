@@ -17,7 +17,6 @@ namespace Parser
         public string Color;
         public string Volume;
         public string[] PicturesList;
-        public bool DataIsCorrect = true;
 
         public Cycle(IHtmlDocument pageCode, Rate rate)
         {
@@ -30,11 +29,6 @@ namespace Parser
         {
             var info = pageCode.QuerySelectorAll("td.ColorCell_2").Select(e => e.TextContent).ToArray();
             var cycleInfo = new[] { info[1], info[4], info[8], info[9], info[12] };
-            if (cycleInfo.Any(string.IsNullOrEmpty))
-            {
-                DataIsCorrect = false;
-                return;
-            }
             GetCycleName();
             Run = cycleInfo[1].Where(char.IsDigit).Aggregate("", (current, c) => current + c);
             Year = cycleInfo[4];
@@ -120,24 +114,6 @@ namespace Parser
                 picturesLinksList[i] = picturesLinksList[i].Substring(0, picturesLinksList[i].LastIndexOf('\u0026'));
 
             PicturesList = picturesLinksList.ToArray();
-        }
-
-        public override string ToString()
-        {
-            return $"Cycle Mark: {CycleMark}\nCycle Model: {CycleModel}\nRun: {Run} km\nYear: {Year}\nPrice: {Price}\nColor: {Color}\nVolume: {Volume}\nPictures: {PicturesList.Length}\n";
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is Cycle cycle &&
-                   CycleMark == cycle.CycleMark &&
-                   CycleModel == cycle.CycleModel &&
-                   Run == cycle.Run &&
-                   Year == cycle.Year &&
-                   Price == cycle.Price &&
-                   Color == cycle.Color &&
-                   Volume == cycle.Volume &&
-                   EqualityComparer<string[]>.Default.Equals(PicturesList, cycle.PicturesList);
         }
 
         private int GetCustom(int year, int volume)
@@ -667,6 +643,47 @@ namespace Parser
                         return 1466;
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Cycle Mark: {CycleMark}\n" +
+                   $"Cycle Model: {CycleModel}\n" +
+                   $"Run: {Run} km\n" +
+                   $"Year: {Year}\n" +
+                   $"Price: {Price}\n" +
+                   $"Color: {Color}\n" +
+                   $"Volume: {Volume}\n" +
+                   $"Pictures: {PicturesList.Length}\n";
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Cycle cycle &&
+                   CycleMark == cycle.CycleMark &&
+                   CycleModel == cycle.CycleModel &&
+                   Run == cycle.Run &&
+                   Year == cycle.Year &&
+                   Price == cycle.Price &&
+                   Color == cycle.Color &&
+                   Volume == cycle.Volume &&
+                   EqualityComparer<string[]>.Default.Equals(PicturesList, cycle.PicturesList);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1811192806;
+            hashCode = hashCode * -1521134295 + EqualityComparer<Rate>.Default.GetHashCode(rate);
+            hashCode = hashCode * -1521134295 + EqualityComparer<IHtmlDocument>.Default.GetHashCode(pageCode);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CycleMark);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CycleModel);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Run);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Year);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Price);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Color);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Volume);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string[]>.Default.GetHashCode(PicturesList);
+            return hashCode;
         }
     }
 }

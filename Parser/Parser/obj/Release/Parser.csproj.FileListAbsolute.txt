@@ -8,3 +8,14 @@ C:\Projects\Moto\Code\Parser\Parser\obj\Release\Parser.exe
 C:\Projects\Moto\Code\Parser\Parser\obj\Release\Parser.pdb
 C:\Projects\Moto\Code\Parser\Parser\bin\Release\xnet.dll
 C:\Projects\Moto\Code\Parser\Parser\obj\Release\Parser.csprojResolveAssemblyReference.cache
+C:\Projects\cycle\Parser\Parser\bin\Release\Parser.exe.config
+C:\Projects\cycle\Parser\Parser\bin\Release\Parser.exe
+C:\Projects\cycle\Parser\Parser\bin\Release\Parser.pdb
+C:\Projects\cycle\Parser\Parser\bin\Release\AngleSharp.dll
+C:\Projects\cycle\Parser\Parser\bin\Release\xnet.dll
+C:\Projects\cycle\Parser\Parser\bin\Release\AngleSharp.xml
+C:\Projects\cycle\Parser\Parser\obj\Release\Parser.csprojResolveAssemblyReference.cache
+C:\Projects\cycle\Parser\Parser\obj\Release\Parser.csproj.CoreCompileInputs.cache
+C:\Projects\cycle\Parser\Parser\obj\Release\Parser.csproj.CopyComplete
+C:\Projects\cycle\Parser\Parser\obj\Release\Parser.exe
+C:\Projects\cycle\Parser\Parser\obj\Release\Parser.pdb

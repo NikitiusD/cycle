@@ -28,7 +28,7 @@ namespace Parser
                 request.UserAgent = HttpHelper.RandomChromeUserAgent();
                 var response = request.Get("http://auc.samurai-motor.ru/auth/login.php");
                 request.Cookies = response.Cookies;
-                response = request.Post("http://auc.samurai-motor.ru/auth/login.php", 
+                request.Post("http://auc.samurai-motor.ru/auth/login.php", 
                                         "username=105951650&password=123456&Submit=%D0%92%D0%BE%D0%B9%D1%82%D0%B8");
                 foreach (var url in urls)
                     Pages.Add(request.Get(url).ToString());

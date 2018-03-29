@@ -7,3 +7,13 @@ C:\Projects\Moto\Code\Parser\Parser\obj\Debug\Parser.exe
 C:\Projects\Moto\Code\Parser\Parser\obj\Debug\Parser.pdb
 C:\Projects\Moto\Code\Parser\Parser\bin\Debug\AngleSharp.dll
 C:\Projects\Moto\Code\Parser\Parser\bin\Debug\AngleSharp.xml
+C:\Projects\cycle\Parser\Parser\bin\Debug\Parser.exe.config
+C:\Projects\cycle\Parser\Parser\bin\Debug\Parser.exe
+C:\Projects\cycle\Parser\Parser\bin\Debug\Parser.pdb
+C:\Projects\cycle\Parser\Parser\bin\Debug\AngleSharp.dll
+C:\Projects\cycle\Parser\Parser\bin\Debug\AngleSharp.xml
+C:\Projects\cycle\Parser\Parser\obj\Debug\Parser.csprojResolveAssemblyReference.cache
+C:\Projects\cycle\Parser\Parser\obj\Debug\Parser.csproj.CoreCompileInputs.cache
+C:\Projects\cycle\Parser\Parser\obj\Debug\Parser.csproj.CopyComplete
+C:\Projects\cycle\Parser\Parser\obj\Debug\Parser.exe
+C:\Projects\cycle\Parser\Parser\obj\Debug\Parser.pdb

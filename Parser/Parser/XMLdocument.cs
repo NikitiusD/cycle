@@ -10,10 +10,9 @@ namespace Parser
         public XmlDocument(IEnumerable<Cycle> cycles)
         {
             this.cycles = cycles;
-            CreateNewXml();
         }
 
-        private void CreateNewXml()
+        public void CreateNewXml()
         {
             var xdoc = new XDocument();
             var data = new XElement("data");
@@ -33,12 +32,16 @@ namespace Parser
                 car.Add(new XElement("custom", "Растаможен"));
                 car.Add(new XElement("price", cycle.Price));
                 car.Add(new XElement("color", cycle.Color));
-                car.Add(new XElement("description", "Мотоцикл представлен как образец на заказ. " +
-                                                    "Качественный подбор, найдем мотоцикл под любой бюджет. " +
-                                                    "Участвуем на всех мотоаукционах BDS, ARAI, JBA, NPA и других. " +
-                                                    "Регулярная контейнерная доставка из Японии - для вас от 1 штуки по оптовой цене. " +
-                                                    "Мотоцикл может быть доставлен в любой город РФ. " +
-                                                    "Подробная информация о возможности заказа, условиях работы и оплаты на нашем сайте."));
+                //car.Add(new XElement("description", "Мотоцикл представлен как образец на заказ. " +
+                //                                    "Качественный подбор, найдем мотоцикл под любой бюджет. " +
+                //                                    "Участвуем на всех мотоаукционах BDS, ARAI, JBA, NPA и других. " +
+                //                                    "Регулярная контейнерная доставка из Японии - для вас от 1 штуки по оптовой цене. " +
+                //                                    "Мотоцикл может быть доставлен в любой город РФ. " +
+                //                                    "Подробная информация о возможности заказа, условиях работы и оплаты на нашем сайте."));
+                car.Add(new XElement("description", "Цена представлена расчетная на основе статистики продаж и может отличатся от фактической цены продажи." +
+                                                    "Цена указана с учетом всех расходов по таможне и доставке в Екатеринбург, Москву." +
+                                                    "Если вы хотите участвовать в торгах за этот мотоцикл и полученить подробное описание, фото, видео с аукциона, звоните прямо сейчас." +
+                                                    "Срок доставки после покупки: 45-50 дней."));
                 car.Add(new XElement("extras", "Электро стартер"));
                 car.Add(new XElement("type", "Классик"));
                 car.Add(new XElement("engine_volume", cycle.Volume));
@@ -51,7 +54,7 @@ namespace Parser
             }
             data.Add(cars);
             xdoc.Add(data);
-            xdoc.Save(@"C:\Projects\Moto\cycles.xml");
+            xdoc.Save(@"C:\Projects\cycle\cycles.xml");
         }
     }
 }
