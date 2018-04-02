@@ -16,6 +16,8 @@ namespace Parser
         public string Price;
         public string Color;
         public string Volume;
+        public string State;
+        public string Date;
         public string[] PicturesList;
 
         public Cycle(IHtmlDocument pageCode, Rate rate)
@@ -28,15 +30,23 @@ namespace Parser
         private void GetAllFields()
         {
             var info = pageCode.QuerySelectorAll("td.ColorCell_2").Select(e => e.TextContent).ToArray();
-            var cycleInfo = new[] { info[1], info[4], info[8], info[9], info[12] };
-            GetCycleName();
+            var cycleInfo = new[] { info[1], info[4], info[8], info[9], info[12], info[2] };
             Run = cycleInfo[1].Where(char.IsDigit).Aggregate("", (current, c) => current + c);
             Year = cycleInfo[4];
+            State = cycleInfo[5];
             var cost = cycleInfo[3] + "000";
             Volume = cycleInfo[2];
             GetPrice(int.Parse(cost));
             GetColor(cycleInfo[0]);
+            GetDate();
+            GetCycleName();
             GetPicturesLinks();
+        }
+
+        private void GetDate()
+        {
+            var date = pageCode.QuerySelectorAll("div.Verdana16px").Select(e => e.TextContent).ToArray()[0].Split('>')[0].Trim().Split('-');
+            Date = date[2] + "-" + date[1] + "-" + date[0];
         }
 
         private void GetPrice(int cost)
@@ -97,8 +107,10 @@ namespace Parser
             for (var i = 0; i < CycleModel.Length; i++)
                 if (char.IsDigit(CycleModel[i]))
                     posOfDigits.Add(i);
-
-            CycleModel = CycleModel.Substring(0, posOfDigits.First()) + " " + CycleModel.Substring(posOfDigits.First(), posOfDigits.Last() - posOfDigits.First() + 1) + " " + CycleModel.Substring(posOfDigits.Last() + 1);
+            if (posOfDigits.Count != 0)
+                CycleModel = CycleModel.Substring(0, posOfDigits.First()) + " " +
+                         CycleModel.Substring(posOfDigits.First(), posOfDigits.Last() - posOfDigits.First() + 1) + " " +
+                         CycleModel.Substring(posOfDigits.Last() + 1);
             CycleModel = CycleModel.Replace("  ", " ");
         }
 
@@ -654,6 +666,8 @@ namespace Parser
                    $"Price: {Price}\n" +
                    $"Color: {Color}\n" +
                    $"Volume: {Volume}\n" +
+                   $"State: {State}\n" +
+                   $"Date: {Date}\n" +
                    $"Pictures: {PicturesList.Length}\n";
         }
 
